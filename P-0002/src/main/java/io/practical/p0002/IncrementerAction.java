@@ -1,11 +1,10 @@
 package io.practical.p0002;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.RecursiveAction;
 
 public class IncrementerAction extends RecursiveAction {
 
+	private static final long serialVersionUID = 6268970553145709441L;
 	int id;
 	int start;
 	int count;
