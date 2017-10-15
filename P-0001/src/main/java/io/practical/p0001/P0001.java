@@ -33,19 +33,21 @@ public class P0001 {
 		System.out.println(uri.toString());
 		try (FileSystem zipfs = FileSystems.newFileSystem(uri, env)) {
 
-			Stream<Path> pathesInZip = Files.walk(zipfs.getPath("/"));
-			pathesInZip.forEach(pathInZip -> {
-				System.out.println(pathInZip.getFileName());
-				if (pathInZip.getFileName() != null) {
-					try {
-						Path tmp = Files.createTempFile("pe-jm-0001_", "_" + pathInZip.getFileName().toString());
-						System.out.println("copy to:" + tmp.toRealPath());
-						Files.copy(pathInZip, tmp, StandardCopyOption.REPLACE_EXISTING);
-					} catch (IOException e) {
-						e.printStackTrace();
+			try (Stream<Path> pathesInZip = Files.walk(zipfs.getPath("/"))) {
+				pathesInZip.forEach(pathInZip -> {
+					System.out.println(pathInZip.getFileName());
+					if (pathInZip.getFileName() != null) {
+						try {
+							Path tmp = Files.createTempFile("pe-jm-0001_", "_" + pathInZip.getFileName().toString());
+							System.out.println("copy to:" + tmp.toRealPath());
+							Files.copy(pathInZip, tmp, StandardCopyOption.REPLACE_EXISTING);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
-				}
-			});
+				});
+				
+			}
 		}
 	}
 
