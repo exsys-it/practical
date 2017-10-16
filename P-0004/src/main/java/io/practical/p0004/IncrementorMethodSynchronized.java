@@ -1,8 +1,8 @@
 package io.practical.p0004;
 
-public class IncrementorMethodSynchronized {
+public class IncrementorMethodSynchronized implements Incrementor {
 
-	Integer count = 0;
+	Long count = 0L;
 
 	public IncrementorMethodSynchronized() {
 	}
@@ -11,7 +11,7 @@ public class IncrementorMethodSynchronized {
 		count++;
 	}
 
-	public int getValue() {
+	public long getValue() {
 		return count;
 	}
 

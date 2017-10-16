@@ -1,34 +1,31 @@
 package io.practical.p0004;
 
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
-public class IncrementorBlocSynchronized {
+public class IncrementorBlocSynchronized implements Incrementor {
 
-	Integer count = 0;
-	
+	Long count = 0L;
+
+	private static final Lock l = new java.util.concurrent.locks.ReentrantLock();
+//	public static final Object lock = new Object();
+
 	public IncrementorBlocSynchronized() {
 	}
 
 	public void inc() {
-		Lock l = new java.util.concurrent.locks.ReentrantLock();
+
+		l.lock();
 		try {
-			l.tryLock(100, TimeUnit.MILLISECONDS);
-			try {
-				count++;
-			} finally {
-			    l.unlock();
-			}
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			count++;
+		} finally {
+			l.unlock();
 		}
-		// synchronized (count) {
-		// count++;
-		// }
+//		 synchronized (lock) {
+//		 count++;
+//		 }
 	}
 
-	public int getValue() {
+	public long getValue() {
 		return count;
 	}
 

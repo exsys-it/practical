@@ -1,10 +1,10 @@
 package io.practical.p0004;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
-public class IncrementorAtomicSynchronized {
+public class IncrementorAtomicSynchronized implements Incrementor {
 
-	AtomicInteger count = new AtomicInteger(0);
+	AtomicLong count = new AtomicLong(0);
 
 	public IncrementorAtomicSynchronized() {
 	}
@@ -13,7 +13,7 @@ public class IncrementorAtomicSynchronized {
 		count.incrementAndGet();
 	}
 
-	public int getValue() {
+	public long getValue() {
 		return count.get();
 	}
 
