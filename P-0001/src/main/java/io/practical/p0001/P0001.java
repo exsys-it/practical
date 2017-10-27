@@ -1,5 +1,6 @@
 package io.practical.p0001;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.file.FileSystem;
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
 
 public class P0001 {
 
-	private static final String PATH = "/Users/xavier/";
+	private static final String PATH = System.getProperty("user.home").replaceAll("\\\\", "/") + "/";
 
 	public static void main(String[] args) throws IOException {
 
