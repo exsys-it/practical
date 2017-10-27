@@ -6,11 +6,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.TearDown;
 
 import io.practical.p0004.incrementor.Incrementor;
 import io.practical.p0004.incrementor.IncrementorAtomicSynchronized;
@@ -69,7 +67,7 @@ public class IncrementorBenchmark {
 			for (int i = 0; i < 1_000_000; i++)
 				executorServ.execute(th);
 			latch.await();
-//			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
+			// executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 		}
 	}
@@ -84,7 +82,7 @@ public class IncrementorBenchmark {
 			for (int i = 0; i < 1_000_000; i++)
 				executorServ.execute(th);
 			latch.await();
-//			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
+			// executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 		}
 	}
@@ -99,7 +97,7 @@ public class IncrementorBenchmark {
 			for (int i = 0; i < 1_000_000; i++)
 				executorServ.execute(th);
 			latch.await();
-//			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
+			// executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 		}
 	}
@@ -114,9 +112,24 @@ public class IncrementorBenchmark {
 			for (int i = 0; i < 1_000_000; i++)
 				executorServ.execute(th);
 			latch.await();
-//			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
+			// executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 		}
 	}
 
 }
+/*
+ 
+# Run complete. Total time: 00:08:14
+
+Benchmark                                                    Mode  Cnt   Score   Error  Units
+IncrementorBenchmark.increment1MatomicMonoThread            thrpt   20  13,927 ± 1,134  ops/s
+IncrementorBenchmark.increment1MatomicMultiThread           thrpt   20   2,922 ± 0,215  ops/s
+IncrementorBenchmark.increment1MblocMonoThread              thrpt   20   6,725 ± 0,587  ops/s
+IncrementorBenchmark.increment1MblocMultiThread             thrpt   20   2,046 ± 0,148  ops/s
+IncrementorBenchmark.increment1MmethodMonoThread            thrpt   20   5,826 ± 0,229  ops/s
+IncrementorBenchmark.increment1MmethodMultiThread           thrpt   20   2,199 ± 0,154  ops/s
+IncrementorBenchmark.increment1MnotSynchronizedMonoThread   thrpt   20  98,101 ± 8,485  ops/s
+IncrementorBenchmark.increment1MnotSynchronizedMultiThread  thrpt   20   2,685 ± 0,263  ops/s
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 495.295 sec
+ */

@@ -1,6 +1,5 @@
 package io.practical.p0001;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -17,7 +16,6 @@ import java.util.stream.Stream;
 
 public class P0001 {
 
-	private static final String PATH = System.getProperty("user.home").replaceAll("\\\\", "/") + "/";
 
 	public static void main(String[] args) throws IOException {
 		
@@ -27,9 +25,7 @@ public class P0001 {
 		
 		fh.write(zipFilename);
 		fh.read(zipFilename);
-
 	}
-	
 }
 
 class FileHelper {

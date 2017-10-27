@@ -30,9 +30,7 @@ questions.
     <version>1.0.0</version>
   </parent>
 
-    <groupId>io.practical</groupId>
     <artifactId>P-0003</artifactId>
-    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>Auto-generated JMH benchmark</name>
