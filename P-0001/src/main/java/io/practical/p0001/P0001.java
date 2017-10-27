@@ -3,6 +3,7 @@ package io.practical.p0001;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URL;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -19,17 +20,32 @@ public class P0001 {
 	private static final String PATH = System.getProperty("user.home").replaceAll("\\\\", "/") + "/";
 
 	public static void main(String[] args) throws IOException {
-
+		
+		FileHelper fh = new FileHelper();
+		
 		String zipFilename = "test_zipname_" + System.currentTimeMillis() + ".zip";
-		write(zipFilename);
-		read(zipFilename);
+		
+		fh.write(zipFilename);
+		fh.read(zipFilename);
 
 	}
+	
+}
 
-	private static void read(String zipFilename) throws IOException {
+class FileHelper {
+	
+	URL strFile;
+	URL root;
+	
+	FileHelper() {
+		this.strFile = this.getClass().getClassLoader().getResource("file.txt");
+		this.root = this.getClass().getClassLoader().getResource("");
+	}
+
+	void read(String zipFilename) throws IOException {
 		Map<String, String> env = new HashMap<>();
 		env.put("create", "false");
-		URI uri = URI.create("jar:file:" + PATH + zipFilename);
+		URI uri = URI.create("jar:file:" + root + zipFilename);
 		System.out.println("READ ---> ");
 		System.out.println(uri.toString());
 		try (FileSystem zipfs = FileSystems.newFileSystem(uri, env)) {
@@ -52,10 +68,10 @@ public class P0001 {
 		}
 	}
 
-	public static void write(String zipFilename) throws IOException {
+	void write(String zipFilename) throws IOException {
 		Map<String, String> env = new HashMap<>();
 		env.put("create", "true");
-		URI uri = URI.create("jar:file:" + PATH + zipFilename);
+		URI uri = URI.create("jar:file:" + root + zipFilename);
 		System.out.println("WRITE ---> ");
 		System.out.println(uri.toString());
 		try (FileSystem zipfs = FileSystems.newFileSystem(uri, env)) {
@@ -65,7 +81,7 @@ public class P0001 {
 			Files.write(file1InZip, "plop".getBytes(), StandardOpenOption.CREATE);
 
 			// file2 copy a file into the zip file
-			Path externalTxtFile = Paths.get(PATH + "/file2.pdf");
+			Path externalTxtFile = Paths.get(root + "/file2.pdf");
 			Path file2InZip = zipfs.getPath("/file2.pdf");
 			System.out.println(file2InZip.toAbsolutePath());
 			Files.copy(externalTxtFile, file2InZip, StandardCopyOption.REPLACE_EXISTING);
@@ -79,4 +95,6 @@ public class P0001 {
 			bw.close();
 		}
 	}
+	
+	
 }
