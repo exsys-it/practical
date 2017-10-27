@@ -1,4 +1,4 @@
-package io.practical.p0004;
+package io.practical.p0004.incrementor;
 
 public class IncrementorMethodSynchronized implements Incrementor {
 

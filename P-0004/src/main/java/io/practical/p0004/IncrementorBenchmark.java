@@ -1,5 +1,6 @@
 package io.practical.p0004;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -10,6 +11,13 @@ import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
+
+import io.practical.p0004.incrementor.Incrementor;
+import io.practical.p0004.incrementor.IncrementorAtomicSynchronized;
+import io.practical.p0004.incrementor.IncrementorBlocSynchronized;
+import io.practical.p0004.incrementor.IncrementorMethodSynchronized;
+import io.practical.p0004.incrementor.IncrementorNotSynchronized;
+import io.practical.p0004.thread.ThreadIncrementor;
 
 @State(Scope.Thread)
 public class IncrementorBenchmark {
@@ -56,10 +64,12 @@ public class IncrementorBenchmark {
 	public void increment1MnotSynchronizedMultiThread() {
 		try {
 			ExecutorService executorServ = Executors.newFixedThreadPool(4);
-			ThreadIncrementor th = new ThreadIncrementor(notSynchronized);
+			CountDownLatch latch = new CountDownLatch(1_000_000);
+			ThreadIncrementor th = new ThreadIncrementor(notSynchronized, latch);
 			for (int i = 0; i < 1_000_000; i++)
 				executorServ.execute(th);
-			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
+			latch.await();
+//			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 		}
 	}
@@ -69,10 +79,12 @@ public class IncrementorBenchmark {
 	public void increment1MmethodMultiThread() {
 		try {
 			ExecutorService executorServ = Executors.newFixedThreadPool(4);
-			ThreadIncrementor th = new ThreadIncrementor(method);
+			CountDownLatch latch = new CountDownLatch(1_000_000);
+			ThreadIncrementor th = new ThreadIncrementor(method, latch);
 			for (int i = 0; i < 1_000_000; i++)
 				executorServ.execute(th);
-			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
+			latch.await();
+//			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 		}
 	}
@@ -82,10 +94,12 @@ public class IncrementorBenchmark {
 	public void increment1MblocMultiThread() {
 		try {
 			ExecutorService executorServ = Executors.newFixedThreadPool(4);
-			ThreadIncrementor th = new ThreadIncrementor(bloc);
+			CountDownLatch latch = new CountDownLatch(1_000_000);
+			ThreadIncrementor th = new ThreadIncrementor(bloc, latch);
 			for (int i = 0; i < 1_000_000; i++)
 				executorServ.execute(th);
-			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
+			latch.await();
+//			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 		}
 	}
@@ -95,10 +109,12 @@ public class IncrementorBenchmark {
 	public void increment1MatomicMultiThread() {
 		try {
 			ExecutorService executorServ = Executors.newFixedThreadPool(4);
-			ThreadIncrementor th = new ThreadIncrementor(atomic);
+			CountDownLatch latch = new CountDownLatch(1_000_000);
+			ThreadIncrementor th = new ThreadIncrementor(atomic, latch);
 			for (int i = 0; i < 1_000_000; i++)
 				executorServ.execute(th);
-			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
+			latch.await();
+//			executorServ.awaitTermination(1500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException e) {
 		}
 	}

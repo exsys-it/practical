@@ -1,4 +1,4 @@
-package io.practical.p0004;
+package io.practical.p0004.incrementor;
 
 import java.util.concurrent.atomic.AtomicLong;
 
