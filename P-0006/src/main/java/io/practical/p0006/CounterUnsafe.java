@@ -1,30 +1,41 @@
 package io.practical.p0006;
 
-import java.util.concurrent.atomic.AtomicLong;
 
 import sun.misc.Unsafe;
 
+@SuppressWarnings("restriction")
 public class CounterUnsafe {
 
 	long counterAddress;
-	Unsafe vladimir;
+	long counterValueOffset;
+	Unsafe unsafe;
+	Integer counter;
 
 	public CounterUnsafe(Unsafe unsafe, long counterAddres) {
 		this.counterAddress = counterAddres;
-		this.vladimir = unsafe;
+		this.unsafe = unsafe;
+		this.counter = 0;
+		try {
+			counterValueOffset = unsafe.objectFieldOffset(Integer.class.getDeclaredField("value"));
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public void increment() {
-		int oldValue;
+		int oldValue = 0;
 		int newValue;
 		do {
-			oldValue = vladimir.getInt(counterAddress);
+			oldValue = unsafe.getInt(counter, counterValueOffset);
 			newValue = oldValue + 1;
-		} while (!vladimir.compareAndSwapInt(this, 0, oldValue, newValue));
+		} while (!unsafe.compareAndSwapInt(counter, counterValueOffset, oldValue, newValue));
 	}
 
 	public long getValue() {
-		return (long) vladimir.getInt(counterAddress);
+		return (long) unsafe.getInt(counter, counterValueOffset);
 	}
 
 }

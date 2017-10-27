@@ -2,8 +2,6 @@ package io.practical.p0006;
 
 import java.util.concurrent.CountDownLatch;
 
-import sun.misc.Unsafe;
-
 public class IncrementorUnsafeThread implements Runnable {
 
 	private CounterUnsafe counter;
