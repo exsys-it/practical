@@ -8,11 +8,12 @@ public class Counter {
 		value = 0;
 	}
 
-	public int getValue() {
-		return this.value;
-	}
-
 	public void increment() {
 		value++;
 	}
+	
+	public int getValue() {
+		return this.value;
+	}
+	
 }
