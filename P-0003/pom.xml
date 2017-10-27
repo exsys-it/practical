@@ -31,7 +31,7 @@ questions.
   </parent>
 
     <groupId>io.practical</groupId>
-    <artifactId>P-0003b</artifactId>
+    <artifactId>P-0003</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
