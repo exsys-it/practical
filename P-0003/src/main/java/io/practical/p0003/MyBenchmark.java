@@ -23,7 +23,7 @@
  * questions.
  */
 
-package io.practical.p0003b;
+package io.practical.p0003;
 
 import java.util.ArrayList;
 import java.util.HashMap;
