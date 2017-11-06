@@ -32,22 +32,29 @@ public class StaxParser {
 				int type = xmlreader.next();
 				switch(type){
 				case XMLEvent.START_DOCUMENT:
-					System.out.println("start doc" +  xmlreader.getLocalName());
+					String sd = xmlreader.getLocalName();
+//					System.out.println("start doc" + sd);
 					break;
 				case XMLEvent.END_DOCUMENT:
-					System.out.println("end doc" +  xmlreader.getLocalName());
+//					String ed = 
+					xmlreader.close();
+//					System.out.println("end doc" + ed);
 					break;
 				case XMLEvent.START_ELEMENT:
-					System.out.println("start elemment" +  xmlreader.getLocalName());
+					String se = xmlreader.getLocalName();
+//					System.out.println("start elemment " + se);
 					break;
 				case XMLEvent.END_ELEMENT:
-					System.out.println("end elemment" +  xmlreader.getLocalName());
+					String ee = xmlreader.getLocalName();
+//					System.out.println("end elemment " + ee);
 					break;
 				case XMLEvent.ATTRIBUTE:
-					System.out.println("attribute" +  xmlreader.getLocalName());
+					String a = xmlreader.getLocalName();
+//					System.out.println("attribute " + a);
 					break;
 				case XMLEvent.CHARACTERS:
-					System.out.println("character" +  xmlreader.getLocalName());
+					String c = xmlreader.getText();
+//					System.out.println("character " + c);
 					break;
 				}
 				

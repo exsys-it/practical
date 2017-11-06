@@ -27,7 +27,7 @@ public class ParserBenchmark {
 	private static final boolean VALIDATE_TRUE = true;
 	private static final boolean VALIDATE_FALSE = false;
 	private static final boolean DISPLAY = false;
-/*
+
 	Path nation = FileHelper.getInstance().openResource("nation.xml");
 	
 	@Benchmark
@@ -53,5 +53,5 @@ public class ParserBenchmark {
 		DomParser parser = new DomParser("domNsNoValidate");
 		parser.parse(nation, NS_TRUE, VALIDATE_FALSE, DISPLAY);
 	}
-*/
+
 }
