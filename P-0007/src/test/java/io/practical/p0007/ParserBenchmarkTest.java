@@ -7,7 +7,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 public class ParserBenchmarkTest {
 	
-	@Test
+//	est
 	public void dotest() throws Exception {
 		// @formatter:off
 		 Options opt = new
