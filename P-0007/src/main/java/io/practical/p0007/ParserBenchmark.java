@@ -53,5 +53,17 @@ public class ParserBenchmark {
 		DomParser parser = new DomParser("domNsNoValidate");
 		parser.parse(nation, NS_TRUE, VALIDATE_FALSE, DISPLAY);
 	}
+	
+	@Benchmark
+	public void staxNoNsNoValidate() throws ParserConfigurationException, SAXException, IOException {
+		StaxParser parser = new StaxParser("domNoNsNoValidate");
+		parser.parse(nation, NS_FALSE, VALIDATE_FALSE, DISPLAY);
+	}
+
+	@Benchmark
+	public void staxNsNoValidate() throws ParserConfigurationException, SAXException, IOException {
+		StaxParser parser = new StaxParser("domNsNoValidate");
+		parser.parse(nation, NS_TRUE, VALIDATE_FALSE, DISPLAY);
+	}
 
 }
